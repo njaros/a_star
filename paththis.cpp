@@ -201,31 +201,3 @@ public :
 	}
 
 };
-
-void parseLine(const std::string &s, coord &c)
-{
-	int idx = s.find(',') + 1;
-	c.first = atoi(&s[0]);
-	c.second = atoi(&s[idx]);
-}
-
-int main(int ac, char **av)
-{
-	if (ac != 2)	return 1;
-	ifstream input(av[1]);
-	if (input.fail()) return 2;
-
-	std::string line;
-	std::set<coord>	coords;
-	coord	pouet;
-	while (!input.eof())
-	{
-		getline(input, line);
-		parseLine(line, pouet);
-		coords.insert(pouet);
-	}
-	AStar	test(coords, coord(0, 0), coord(5, 5));
-	std::cout << test.stepCount().first << ' ' << test.stepCount().second << '\n';
-	std::cout << test.stepCount().first << ' ' << test.stepCount().second << '\n';
-	return 0;
-}
