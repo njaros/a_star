@@ -11,7 +11,6 @@
 using namespace std;
 
 typedef pair<int, int>          coord;
-typedef set<pair<int, coord> >  army;
 
 coord   &operator+=(coord &lhs, const coord &rhs)
 {
@@ -44,36 +43,6 @@ int ManhattanNorm(const coord &a, const coord &b)
 	return (abs(a.first - b.first) + abs(a.second - b.second));
 }
 
-void    spawn(int nb, int x, int y)
-{
-	std::cout << "SPAWN " << nb << ' ' << x << ' ' << y << ';';
-}
-
-void    spawn(int nb, coord c)
-{
-	spawn(nb, c.first, c.second);
-}
-
-void    move(int nb, int xFrom, int yFrom, int xTo, int yTo)
-{
-	std::cout << "MOVE " << nb << ' ' << xFrom << ' ' << yFrom << ' ' << xTo << ' ' << yTo << ';';
-}
-
-void    move(int nb, coord cFrom, coord cTo)
-{
-	move(nb, cFrom.first, cFrom.second, cTo.first, cTo.second);
-}
-
-void    build(int x, int y)
-{
-	std::cout << "BUILD " << x << ' ' << y << ';';
-}
-
-void    build(coord c)
-{
-	build(c.first, c.second);
-}
-
 ostream &operator<<(ostream &o, const coord &c)
 {
 	o << c.first << "|" << c.second;
@@ -83,13 +52,6 @@ ostream &operator<<(ostream &o, const coord &c)
 ostream &operator<<(ostream &o, const pair<int, coord> &p)
 {
 	o << p.first << "->" << p.second;
-	return o;
-}
-
-ostream &operator<<(ostream &o, const army &a)
-{
-	for (army::const_iterator it = a.begin(); it != a.end(); ++it)
-		o << *it << '\n';
 	return o;
 }
 
@@ -200,10 +162,6 @@ public :
 			_checkSide(std::make_pair(0, 1));	//DOWN
 			_checkSide(std::make_pair(1, 0));	//RIGHT
 			std::pair<closeType::iterator, bool> res = _close.insert(std::make_pair(_open.begin()->second->_pos, _open.begin()->second));
-			/*if (!res.second)
-			{
-				std::cerr << "error\n";
-			}*/
 			_open.erase(_open.begin());
 			if (!ManhattanNorm(_current->_pos, end))
 				_endReached = true;
