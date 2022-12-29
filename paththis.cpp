@@ -6,15 +6,9 @@
 #include <map>
 #include <set>
 #include <algorithm>
-#include <tuple>
 #include <cmath>
 
 using namespace std;
-
-#define MINE 1
-#define OPP 0
-#define NONE -1
-#define MIN_REC 5
 
 typedef pair<int, int>          coord;
 typedef set<pair<int, coord> >  army;
